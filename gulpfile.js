@@ -27,7 +27,7 @@ gulp.task("sass", () => {
     .pipe(sass({
       includePaths: require('node-reset-scss').includePath
     }))
-    .pipe(gulp.dest("./dist/css"))
+    .pipe(gulp.dest("./docs/css"))
     .pipe(browserSync.stream())
 });
 
@@ -41,7 +41,7 @@ gulp.task("pug", () => {
       errorHandler: notify.onError("Error: <%= error.message %>")
     }))
     .pipe(pug(option))
-    .pipe(gulp.dest("./dist"))
+    .pipe(gulp.dest("./docs"))
 });
 
 gulp.task('reload', () => {
@@ -51,24 +51,24 @@ gulp.task('reload', () => {
 /*
 gulp.task('img', function() {
     gulp.src('./src/img/*.jpg')
-        .pipe(gulp.dest('./dist/img'));
+        .pipe(gulp.dest('./docs/img'));
 });
 */
 
 // jsの移動
 gulp.task('js', function() {
     gulp.src('./src/js/**/*.js')
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./docs/js'));
 });
 
 gulp.task('browser-sync', () => {
   browserSync({
     server: {
-      baseDir: "./dist"
+      baseDir: "./docs"
     }
   });
-  gulp.watch("./dist/js/**/*.js", ['reload']);
-  gulp.watch("./dist/*.html", ['reload']);
+  gulp.watch("./docs/js/**/*.js", ['reload']);
+  gulp.watch("./docs/*.html", ['reload']);
 });
 
 gulp.task('default', ['sass', 'pug', 'js', 'watch', 'browser-sync']);
